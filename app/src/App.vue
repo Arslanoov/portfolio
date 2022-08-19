@@ -26,8 +26,8 @@
           Creating projects & products <span>&#128200;</span>
         </p>
         <p class="description__paragraph">
-          Always looking to collaborate on anything free and open source <span>	&#128156;</span>.
-          Sometimes I create some projects on
+          Always looking to collaborate on anything free and open source <span>	&#128156;</span> <br>
+          Sometimes I create projects on
           <a href="https://github.com/Arslanoov" target="_blank">GitHub</a>
         </p>
       </div>
@@ -227,10 +227,10 @@ export default {
 
     onMounted(async () => {
       const { data: projectsData } = await api.get('/api/content-items/latest?lang=en&type=Project');
-      projects.value = projectsData;
+      projects.value = projectsData
 
       const { data: articlesData } = await api.get('/api/content-items/latest?lang=en&type=Article');
-      articles.value = articlesData;
+      articles.value = articlesData
     })
 
     const onImgDrag = (e) => {
