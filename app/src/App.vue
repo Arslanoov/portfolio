@@ -27,7 +27,7 @@
         </p>
         <p class="description__paragraph">
           Always looking to collaborate on anything free and open source <span>	&#128156;</span>.
-          Sometimes I write create some projects on my
+          Sometimes I create some projects on
           <a href="https://github.com/Arslanoov" target="_blank">GitHub</a>
         </p>
       </div>
