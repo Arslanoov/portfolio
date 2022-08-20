@@ -84,11 +84,6 @@
     </section>
 
     <footer class="about__footer footer">
-      <div class="footer_info">
-        This is a preview site.
-        <a :href="siteUrl" class="footer__link" target="_blank">Click here</a> to see full website.
-      </div>
-
       <ul class="footer__contact contacts">
         <li class="contacts__item">
           <a href="https://www.linkedin.com/in/arslanoov/" target="_blank" class="contacts__item-link">
@@ -100,7 +95,27 @@
             GitHub
           </a>
         </li>
+        <li class="contacts__item">
+          <a href="https://habr.com/ru/users/Arslanoov/" target="_blank" class="contacts__item-link">
+            Habr
+          </a>
+        </li>
+        <li class="contacts__item">
+          <a href="https://vc.ru/u/979383-rasul-arslanov" target="_blank" class="contacts__item-link">
+            VC
+          </a>
+        </li>
+        <li class="contacts__item">
+          <a href="mailto:rasularslanoov@gmail.com" class="contacts__item-link">
+            rasularslanoov@gmail.com
+          </a>
+        </li>
       </ul>
+
+      <div class="footer__info">
+        This is a preview site.
+        <a :href="siteUrl" class="footer__link" target="_blank">Click here</a> to see the full website.
+      </div>
     </footer>
   </div>
 </template>
@@ -110,6 +125,10 @@
   width: 80%;
 
   margin: 5rem auto;
+
+  @media screen and (max-width: 768px) {
+    margin: 2rem auto;
+  }
 }
 
 .header {
