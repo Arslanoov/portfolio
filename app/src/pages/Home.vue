@@ -36,30 +36,6 @@
       <div class="description__clear" />
     </div>
 
-    <section class="about__projects projects">
-      <h3>{{ t('projects.title') }}</h3>
-      <template v-if="projects?.items && projects.items.length > 0">
-        <ul class="projects__list">
-          <li v-for="project in projects.items" class="item" :key="project.id">
-            <a
-                :href="`${siteUrl}/${project.slug}`"
-                target="_blank"
-                class="item__link"
-            >
-              {{ project.title }}
-              <img v-if="project.cover" :src="project.cover" class="item__cover" alt="">
-            </a>
-            <p v-if="project.description" class="item__description">
-              {{ project.description }}
-            </p>
-          </li>
-        </ul>
-      </template>
-      <template v-else>
-        {{ t('projects.nothing') }} &#128528;
-      </template>
-    </section>
-
     <section class="about__articles articles">
       <h3>{{ t('articles.title') }}</h3>
       <template v-if="articles?.items && articles.items.length > 0">
@@ -81,6 +57,30 @@
       </template>
       <template v-else>
         {{ t('articles.nothing') }} &#128528;
+      </template>
+    </section>
+
+    <section class="about__projects projects">
+      <h3>{{ t('projects.title') }}</h3>
+      <template v-if="projects?.items && projects.items.length > 0">
+        <ul class="projects__list">
+          <li v-for="project in projects.items" class="item" :key="project.id">
+            <a
+                :href="`${siteUrl}/${project.slug}`"
+                target="_blank"
+                class="item__link"
+            >
+              {{ project.title }}
+              <img v-if="project.cover" :src="project.cover" class="item__cover" alt="">
+            </a>
+            <p v-if="project.description" class="item__description">
+              {{ project.description }}
+            </p>
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        {{ t('projects.nothing') }} &#128528;
       </template>
     </section>
 
