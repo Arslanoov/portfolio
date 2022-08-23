@@ -87,6 +87,11 @@
     <footer class="about__footer footer">
       <ul class="footer__contact contacts">
         <li class="contacts__item">
+          <a :href="`/${changeLang}`" class="contacts__item-link">
+            {{ lang.toUpperCase() }} -> {{ changeLang.toUpperCase() }}
+          </a>
+        </li>
+        <li class="contacts__item">
           <a href="https://www.linkedin.com/in/arslanoov/" target="_blank" class="contacts__item-link">
             Linkedin
           </a>
@@ -130,7 +135,7 @@ import { useI18n } from 'vue-i18n'
 
 import api from '../api'
 
-import { LANGUAGES, DEFAULT_LANGUAGE } from '../const/lang'
+import { LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_EN, LANGUAGE_RU } from '../const/lang'
 
 const siteUrl = import.meta.env.VITE_MAIN_SITE_BASE_URL
 
@@ -177,6 +182,8 @@ export default {
     return {
       projects,
       articles,
+      lang,
+      changeLang: lang === LANGUAGE_RU ? LANGUAGE_EN : LANGUAGE_RU,
       siteUrl: `${siteUrl}/${locale.value}`,
       onImgDrag,
       t,
