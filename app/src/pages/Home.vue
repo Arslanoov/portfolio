@@ -39,8 +39,8 @@
     <section class="about__projects projects">
       <h3>{{ t('projects.title') }}</h3>
       <template v-if="projects?.items && projects.items.length > 0">
-        <ul v-for="project in projects.items" class="projects__list">
-          <li class="item" :key="project.id">
+        <ul class="projects__list">
+          <li v-for="project in projects.items" class="item" :key="project.id">
             <a
                 :href="`${siteUrl}/${project.slug}`"
                 target="_blank"
@@ -63,8 +63,8 @@
     <section class="about__articles articles">
       <h3>{{ t('articles.title') }}</h3>
       <template v-if="articles?.items && articles.items.length > 0">
-        <ul v-for="article in articles.items" class="articles__list">
-          <li class="item" :key="article.id">
+        <ul class="articles__list">
+          <li v-for="article in articles.items" class="item" :key="article.id">
             <a
                 :href="`${siteUrl}/${article.slug}`"
                 target="_blank"
