@@ -310,11 +310,9 @@ export default {
 
 .projects,
 .articles {
-  font-size: 1.8rem;
-}
-
-.articles {
   margin-bottom: 2rem;
+
+  font-size: 1.8rem;
 }
 
 .item {
