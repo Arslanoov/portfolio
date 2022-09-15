@@ -1,3 +1,6 @@
-export const DEFAULT_LANGUAGE = 'en'
+export const LANGUAGE_RU = 'ru'
+export const LANGUAGE_EN = 'en'
 
-export const LANGUAGES = ['en', 'ru']
+export const DEFAULT_LANGUAGE = LANGUAGE_EN
+
+export const LANGUAGES = [LANGUAGE_EN, LANGUAGE_RU]

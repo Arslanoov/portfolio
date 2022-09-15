@@ -36,35 +36,11 @@
       <div class="description__clear" />
     </div>
 
-    <section class="about__projects projects">
-      <h3>{{ t('projects.title') }}</h3>
-      <template v-if="projects?.items && projects.items.length > 0">
-        <ul v-for="project in projects.items" class="projects__list">
-          <li class="item" :key="project.id">
-            <a
-                :href="`${siteUrl}/${project.slug}`"
-                target="_blank"
-                class="item__link"
-            >
-              {{ project.title }}
-              <img v-if="project.cover" :src="project.cover" class="item__cover" alt="">
-            </a>
-            <p v-if="project.description" class="item__description">
-              {{ project.description }}
-            </p>
-          </li>
-        </ul>
-      </template>
-      <template v-else>
-        {{ t('projects.nothing') }} &#128528;
-      </template>
-    </section>
-
     <section class="about__articles articles">
       <h3>{{ t('articles.title') }}</h3>
       <template v-if="articles?.items && articles.items.length > 0">
-        <ul v-for="article in articles.items" class="articles__list">
-          <li class="item" :key="article.id">
+        <ul class="articles__list">
+          <li v-for="article in articles.items" class="item" :key="article.id">
             <a
                 :href="`${siteUrl}/${article.slug}`"
                 target="_blank"
@@ -84,8 +60,37 @@
       </template>
     </section>
 
+    <section class="about__projects projects">
+      <h3>{{ t('projects.title') }}</h3>
+      <template v-if="projects?.items && projects.items.length > 0">
+        <ul class="projects__list">
+          <li v-for="project in projects.items" class="item" :key="project.id">
+            <a
+                :href="`${siteUrl}/${project.slug}`"
+                target="_blank"
+                class="item__link"
+            >
+              {{ project.title }}
+              <img v-if="project.cover" :src="project.cover" class="item__cover" alt="">
+            </a>
+            <p v-if="project.description" class="item__description">
+              {{ project.description }}
+            </p>
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        {{ t('projects.nothing') }} &#128528;
+      </template>
+    </section>
+
     <footer class="about__footer footer">
       <ul class="footer__contact contacts">
+        <li class="contacts__item">
+          <a :href="`/${changeLang}`" class="contacts__item-link">
+            {{ lang.toUpperCase() }} -> {{ changeLang.toUpperCase() }}
+          </a>
+        </li>
         <li class="contacts__item">
           <a href="https://www.linkedin.com/in/arslanoov/" target="_blank" class="contacts__item-link">
             Linkedin
@@ -130,7 +135,7 @@ import { useI18n } from 'vue-i18n'
 
 import api from '../api'
 
-import { LANGUAGES, DEFAULT_LANGUAGE } from '../const/lang'
+import { LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_EN, LANGUAGE_RU } from '../const/lang'
 
 const siteUrl = import.meta.env.VITE_MAIN_SITE_BASE_URL
 
@@ -177,6 +182,8 @@ export default {
     return {
       projects,
       articles,
+      lang,
+      changeLang: lang === LANGUAGE_RU ? LANGUAGE_EN : LANGUAGE_RU,
       siteUrl: `${siteUrl}/${locale.value}`,
       onImgDrag,
       t,
@@ -303,11 +310,9 @@ export default {
 
 .projects,
 .articles {
-  font-size: 1.8rem;
-}
-
-.articles {
   margin-bottom: 2rem;
+
+  font-size: 1.8rem;
 }
 
 .item {
