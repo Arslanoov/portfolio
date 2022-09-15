@@ -85,7 +85,7 @@ export default {
 
   overflow: hidden;
 
-  background: url("../assets/background.jpg") no-repeat #fff center center;
+  background: url("../assets/background.jpg") #fff center top / cover no-repeat fixed;
   background-size: cover;
 }
 </style>

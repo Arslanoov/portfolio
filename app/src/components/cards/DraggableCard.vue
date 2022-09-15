@@ -13,7 +13,12 @@
     :parent="true"
     :z="active ? 5 : 1"
   >
-    <div class="draggable-container">
+    <div class="draggable__header">
+      <h3 class="draggable__title">
+        <slot name="header">Articles</slot>
+      </h3>
+    </div>
+    <div class="draggable__container">
       <slot />
     </div>
   </vue-draggable-resizable>
@@ -23,8 +28,6 @@
 import { ref, defineProps } from 'vue'
 
 import throttle from '../../utils/throttle.js'
-import { vw } from '../../utils/sizes.js'
-import { isMobile } from '../../utils/sizes.js'
 
 const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, name } = defineProps({
   initialWidth: Number,
@@ -73,14 +76,46 @@ const hideWindow = () => active.value = false
 </script>
 
 <style lang="scss" scoped>
-.draggable-container {
-  width: 100%;
-  height: 100%;
+.draggable {
+  &__header,
+  &__container {
+    width: 100%;
+  }
 
-  padding: 2rem;
+  &__header {
+    display: flex;
+    align-items: center;
 
-  overflow: scroll;
+    overflow: hidden;
 
-  background: #fff;
+    height: 3.5rem;
+
+    border-radius: 0.5rem 0.5rem 0 0;
+
+    background-color: #4f79e3;
+
+    padding: 0.2rem 2rem;
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    text-overflow: ellipsis;
+
+    color: #fff;
+  }
+
+  &__container {
+    height: calc(100% - 2.5rem);
+
+    border-radius: 0 0 0.5rem 0.5rem;
+
+    padding: 2rem;
+
+    overflow: scroll;
+
+    background: #fff;
+  }
 }
 </style>

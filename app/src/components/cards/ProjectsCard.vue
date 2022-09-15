@@ -7,7 +7,7 @@
     :min-width="50"
     :min-height="50"
   >
-    <section class="about__projects projects">
+    <section class="projects">
       <h3>{{ t('projects.title') }}</h3>
       <template v-if="projects?.items && projects.items.length > 0">
         <ul class="projects__list">

@@ -7,7 +7,7 @@
       :min-width="50"
       :min-height="50"
   >
-    <header class="about__header header">
+    <header class="header">
       <div>
         <h1 class="header__title">{{ t('header.title') }}</h1>
         <p class="header__subtitle">{{ t('header.subtitle') }}</p>

@@ -7,29 +7,33 @@
     :min-width="50"
     :min-height="50"
   >
-    <section class="about__articles articles">
-      <h3>{{ t('articles.title') }}</h3>
-      <template v-if="articles?.items && articles.items.length > 0">
-        <ul class="articles__list">
-          <li v-for="article in articles.items" class="item" :key="article.id">
-            <a
-                :href="`${siteUrl}/${article.slug}`"
-                target="_blank"
-                class="item__link"
-            >
-              {{ article.title }}
-              <img v-if="article.cover" :src="article.cover" class="item__cover" alt="">
-            </a>
-            <p v-if="article.description" class="item__description">
-              {{ article.description }}
-            </p>
-          </li>
-        </ul>
-      </template>
-      <template v-else>
-        {{ t('articles.nothing') }}
-      </template>
-    </section>
+    <slot name="header">Articles</slot>
+
+    <slot>
+      <section class="articles">
+        <h3>{{ t('articles.title') }}</h3>
+        <template v-if="articles?.items && articles.items.length > 0">
+          <ul class="articles__list">
+            <li v-for="article in articles.items" class="item" :key="article.id">
+              <a
+                  :href="`${siteUrl}/${article.slug}`"
+                  target="_blank"
+                  class="item__link"
+              >
+                {{ article.title }}
+                <img v-if="article.cover" :src="article.cover" class="item__cover" alt="">
+              </a>
+              <p v-if="article.description" class="item__description">
+                {{ article.description }}
+              </p>
+            </li>
+          </ul>
+        </template>
+        <template v-else>
+          {{ t('articles.nothing') }}
+        </template>
+      </section>
+    </slot>
   </draggable-card>
 </template>
 
