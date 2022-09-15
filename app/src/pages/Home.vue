@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <AboutCard :t="t" />
-    <ArticlesCard :t="t" :site-url="siteUrl" :articles="articles" />
-    <ProjectsCard :t="t" :site-url="siteUrl" :projects="projects" />
-    <BottomMenu :key="lang" :change-lang="changeLang" />
+    <AboutCard :t="t" name="about" />
+    <ArticlesCard :t="t" :site-url="siteUrl" :articles="articles" name="articles" />
+    <ProjectsCard :t="t" :site-url="siteUrl" :projects="projects" name="projects" />
+    <BottomMenu :change-lang="changeLang" />
   </div>
 </template>
 

@@ -1,16 +1,18 @@
 <template>
   <vue-draggable-resizable
-      :w="isMobile ? '100vw' : width"
-      :h="height"
-      :min-width="minWidth"
-      :min-height="minHeight"
-      @dragging="onDrag"
-      @resizing="onResize"
-      @click="moveWindow"
-      v-click-away="hideWindow"
-      :axis="isMobile ? 'y' : 'both'"
-      :parent="true"
-      :z="active ? 5 : 1"
+    :w="isMobile ? '100vw' : width"
+    :h="height"
+    :x="x"
+    :y="y"
+    :min-width="minWidth"
+    :min-height="minHeight"
+    @dragging="onDrag"
+    @resizing="onResize"
+    @click="moveWindow"
+    v-click-away="hideWindow"
+    :axis="isMobile ? 'y' : 'both'"
+    :parent="true"
+    :z="active ? 5 : 1"
   >
     <div class="draggable-container">
       <slot />
@@ -19,38 +21,52 @@
 </template>
 
 <script setup>
-import { ref, defineProps, toRefs } from 'vue'
+import { ref, defineProps } from 'vue'
 
-const props = defineProps({
+import throttle from '../../utils/throttle.js'
+
+const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, name } = defineProps({
   initialWidth: Number,
   initialHeight: Number,
   initialX: Number,
   initialY: Number,
   minWidth: Number,
   minHeight: Number,
+  name: String
 })
 
-const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight } = toRefs(props)
+const isMobile = window.innerWidth < 768
 
-const width = ref(initialWidth)
-const height = ref(initialHeight)
-const x = ref(initialX)
-const y = ref(initialY)
+const getStorageData = (prop) => Number(localStorage.getItem(`card_${name}_${prop}`)) ?? 0
+
+const width = ref(getStorageData('width') || initialWidth)
+const height = ref(getStorageData('height') || initialHeight)
+const x = ref(getStorageData('x') || initialX)
+const y = ref(getStorageData('y') || initialY)
 const active = ref(false)
 
-const isMobile = window.innerWidth < 768
+const updateStorageData = throttle((name) => {
+  localStorage.setItem(`card_${name}_x`, String(Math.min(x.value, window.innerWidth - 20)))
+  localStorage.setItem(`card_${name}_y`, String(Math.min(y.value, window.innerHeight - 20)))
+  localStorage.setItem(`card_${name}_width`, String(Math.min(width.value, window.innerWidth - 20)))
+  localStorage.setItem(`card_${name}_height`, String(Math.min(height.value, window.innerHeight - 20)))
+}, 750)
 
 const onResize = (newX, newY, newWidth, newHeight) => {
   x.value = newX
   y.value = newY
   width.value = newWidth
   height.value = newHeight
+
+  updateStorageData(name)
 }
 
 const onDrag = (newX, newY) => {
   x.value = newX
   y.value = newY
   active.value = true
+
+  updateStorageData(name)
 }
 
 const moveWindow = () => active.value = true

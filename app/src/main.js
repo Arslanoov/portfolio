@@ -3,7 +3,7 @@ import VueDraggableResizable from 'vue-draggable-resizable/src/components/vue-dr
 import VueClickAway from 'vue3-click-away';
 
 import router from './router'
-import i18n from './utils/i18n'
+import i18n from './utils/i18n.js'
 
 import App from './App.vue'
 

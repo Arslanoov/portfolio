@@ -1,12 +1,11 @@
 <template>
   <draggable-card
-      :initial-width="300"
-      :initial-height="200"
-      :min-width="50"
-      :min-height="50"
-      :initial-x="200"
-      :initial-y="300"
-      style="border: 2px solid green"
+    :initial-width="vw(28)"
+    :initial-height="vh(23)"
+    :initial-x="vw(65)"
+    :initial-y="vh(12)"
+    :min-width="50"
+    :min-height="50"
   >
     <section class="about__articles articles">
       <h3>{{ t('articles.title') }}</h3>
@@ -28,24 +27,24 @@
         </ul>
       </template>
       <template v-else>
-        {{ t('articles.nothing') }} &#128528;
+        {{ t('articles.nothing') }}
       </template>
     </section>
   </draggable-card>
 </template>
 
 <script setup>
-import { toRefs, defineProps } from 'vue'
+import { defineProps } from 'vue'
+
+import { vw, vh } from '../../utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const props = defineProps({
+const { t, articles, siteUrl } = defineProps({
   t: Function,
   siteUrl: String,
-  articles: Array
+  articles: Object
 })
-
-const { t, articles, siteUrl } = toRefs(props)
 </script>
 
 <style lang="scss">

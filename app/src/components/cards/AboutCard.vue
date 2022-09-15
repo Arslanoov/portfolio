@@ -1,12 +1,11 @@
 <template>
   <draggable-card
-      :initial-width="300"
-      :initial-height="200"
+      :initial-width="vw(56)"
+      :initial-height="vh(65)"
+      :initial-x="vw(2)"
+      :initial-y="vh(8)"
       :min-width="50"
       :min-height="50"
-      :initial-x="200"
-      :initial-y="300"
-      style="border: 2px solid blue"
   >
     <header class="about__header header">
       <div>
@@ -16,14 +15,6 @@
     </header>
 
     <div class="description">
-      <img
-          @drag.once="onImgDrag"
-          :title="t('description.coverTitle')"
-          class="description__img" src="../../assets/me.jpg"
-          title="That's me!"
-          alt=""
-      >
-
       <div class="description__text">
         <p class="description__paragraph">
           {{ t('description.paragraph1') }}&nbsp;&nbsp;<span>&#128187;</span>
@@ -77,20 +68,15 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs } from 'vue'
+import { defineProps } from 'vue'
+
+import { vw, vh } from '../../utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const props = defineProps({
+const { t } = defineProps({
   t: Function
 })
-
-const { t } = toRefs(props)
-
-const onImgDrag = (e) => {
-  e.preventDefault()
-  alert('Don\'t drag me! :(')
-}
 </script>
 
 <style lang="scss" scoped>

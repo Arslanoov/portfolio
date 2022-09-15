@@ -14,7 +14,7 @@
 <script setup>
 import { defineProps, toRefs, ref } from 'vue'
 
-import { formatHours, formatMinutes } from '../../utils/date/format.js';
+import { formatHours, formatMinutes } from '../../utils/date.js';
 
 const hours = ref()
 const minutes = ref()
@@ -30,7 +30,7 @@ const updateTime = () => {
   minutes.value = formatMinutes(now.getMinutes())
 }
 
-window.setInterval(() => updateTime, 60000)
+window.setInterval(() => updateTime, 15000)
 updateTime()
 
 const {
