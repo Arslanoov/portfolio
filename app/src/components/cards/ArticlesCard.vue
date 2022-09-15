@@ -45,7 +45,7 @@ const props = defineProps({
   articles: Array
 })
 
-const { t, articles } = toRefs(props)
+const { t, articles, siteUrl } = toRefs(props)
 </script>
 
 <style lang="scss">
@@ -74,20 +74,3 @@ const { t, articles } = toRefs(props)
   }
 }
 </style>
-
-<i18n>
-{
-  "en": {
-    "articles": {
-      "title": "Recent articles",
-      "nothing": "Nothing here"
-    }
-  },
-  "ru": {
-    "articles": {
-      "title": "Последние статьи",
-      "nothing": "Здесь пусто"
-    }
-  }
-}
-</i18n>

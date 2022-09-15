@@ -19,7 +19,7 @@
       <img
           @drag.once="onImgDrag"
           :title="t('description.coverTitle')"
-          class="description__img" src="../assets/me.jpg"
+          class="description__img" src="../../assets/me.jpg"
           title="That's me!"
           alt=""
       >
@@ -47,11 +47,6 @@
     <footer class="about__footer footer">
       <ul class="footer__contact contacts">
         <li class="contacts__item">
-          <a :href="`/${changeLang}`" class="contacts__item-link">
-            {{ lang.toUpperCase() }} -> {{ changeLang.toUpperCase() }}
-          </a>
-        </li>
-        <li class="contacts__item">
           <a href="https://www.linkedin.com/in/arslanoov/" target="_blank" class="contacts__item-link">
             Linkedin
           </a>
@@ -77,13 +72,6 @@
           </a>
         </li>
       </ul>
-
-      <div class="footer__info">
-        {{ t('footer.preview') }}
-        <a :href="siteUrl" class="footer__link" target="_blank">
-          {{ t('footer.visitFullClick') }}
-        </a> {{ t('footer.visitFull') }}.
-      </div>
     </footer>
   </draggable-card>
 </template>
@@ -94,16 +82,10 @@ import { defineProps, toRefs } from 'vue'
 import DraggableCard from './DraggableCard.vue'
 
 const props = defineProps({
-  t: Function,
-  lang: String,
-  changeLang: String
+  t: Function
 })
 
-const {
-  t,
-  lang,
-  changeLang
-} = toRefs(props)
+const { t } = toRefs(props)
 
 const onImgDrag = (e) => {
   e.preventDefault()
@@ -183,46 +165,3 @@ const onImgDrag = (e) => {
   }
 }
 </style>
-
-<i18n>
-{
-  "en": {
-    "header": {
-      "title": "Hi! I'm Rasul Arslanov",
-      "subtitle": "Frontend developer with 3+ years of experience"
-    },
-    "description": {
-      "coverTitle": "That's me!",
-      "paragraph1": "Working",
-      "paragraph2": "Writing articles",
-      "paragraph3": "Creating projects & products",
-      "paragraph4Part1": "Always looking to collaborate on anything free and open source",
-      "paragraph4Part2": "Sometimes I create projects on"
-    },
-    "footer": {
-      "preview": "This is a preview site.",
-      "visitFullClick": "Click here",
-      "visitFull": "to see the full website"
-    }
-  },
-  "ru": {
-    "header": {
-      "title": "Привет! Я Расуль Арсланов",
-      "subtitle": "Фронтенд разработчик с 3+ годами опыта"
-    },
-    "description": {
-      "coverTitle": "Это я!",
-      "paragraph1": "Работаю",
-      "paragraph2": "Пишу статьи",
-      "paragraph3": "Создаю проекты & продукты",
-      "paragraph4Part1": "Рад поучаствовать в OpenSource",
-      "paragraph4Part2": "Иногда работаю над своими проектами на"
-    },
-    "footer": {
-      "preview": "Это сайт-превью.",
-      "visitFullClick": "Нажми сюда",
-      "visitFull": "чтобы перейти на полную версию сайта"
-    }
-  }
-}
-</i18n>

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import VueDraggableResizable from 'vue-draggable-resizable/src/components/vue-draggable-resizable.vue'
+import VueClickAway from 'vue3-click-away';
 
 import router from './router'
 import i18n from './utils/i18n'
@@ -14,7 +15,6 @@ const app = createApp(App)
 app
     .use(router)
     .use(i18n)
-
-app.component('vue-draggable-resizable', VueDraggableResizable)
-
-app.mount('#app')
+    .use(VueClickAway)
+    .component('vue-draggable-resizable', VueDraggableResizable)
+    .mount('#app')
