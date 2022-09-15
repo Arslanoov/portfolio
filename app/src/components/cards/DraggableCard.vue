@@ -1,6 +1,6 @@
 <template>
   <vue-draggable-resizable
-    :w="isMobile ? '100vw' : width"
+    :w="width"
     :h="height"
     :x="x"
     :y="y"
@@ -10,7 +10,6 @@
     @resizing="onResize"
     @click="moveWindow"
     v-click-away="hideWindow"
-    :axis="isMobile ? 'y' : 'both'"
     :parent="true"
     :z="active ? 5 : 1"
   >
@@ -24,6 +23,8 @@
 import { ref, defineProps } from 'vue'
 
 import throttle from '../../utils/throttle.js'
+import { vw } from '../../utils/sizes.js'
+import { isMobile } from '../../utils/sizes.js'
 
 const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, name } = defineProps({
   initialWidth: Number,
@@ -34,8 +35,6 @@ const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, na
   minHeight: Number,
   name: String
 })
-
-const isMobile = window.innerWidth < 768
 
 const getStorageData = (prop) => Number(localStorage.getItem(`card_${name}_${prop}`)) ?? 0
 

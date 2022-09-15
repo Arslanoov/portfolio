@@ -1,9 +1,9 @@
 <template>
   <draggable-card
-    :initial-width="vw(28)"
+    :initial-width="isMobile ? vw(70) : vw(28)"
     :initial-height="vh(23)"
-    :initial-x="vw(65)"
-    :initial-y="vh(12)"
+    :initial-x="isMobile ? vw(2) : vw(65)"
+    :initial-y="isMobile ? vh(70) : vh(12)"
     :min-width="50"
     :min-height="50"
   >
@@ -37,6 +37,7 @@
 import { defineProps } from 'vue'
 
 import { vw, vh } from '../../utils/sizes.js'
+import { isMobile } from '../../utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 

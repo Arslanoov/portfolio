@@ -83,7 +83,7 @@ export default {
   width: 100vw;
   height: 100vh;
 
-  overflow: scroll;
+  overflow: hidden;
 
   background: url("../assets/background.jpg") no-repeat #fff center center;
   background-size: cover;

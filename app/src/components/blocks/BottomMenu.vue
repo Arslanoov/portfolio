@@ -30,7 +30,7 @@ const updateTime = () => {
   minutes.value = formatMinutes(now.getMinutes())
 }
 
-window.setInterval(() => updateTime, 15000)
+window.setInterval(() => updateTime(), 15000)
 updateTime()
 
 const {
