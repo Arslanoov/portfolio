@@ -2,7 +2,7 @@
   <draggable-card
     :title="t('projects.title')"
     :initial-width="isMobile ? vw(80) : vw(30)"
-    :initial-height="vh(23)"
+    :initial-height="vh(28)"
     :initial-x="isMobile ? vw(15) : vw(67)"
     :initial-y="isMobile ? vh(55) : vh(46)"
     :min-width="100"
