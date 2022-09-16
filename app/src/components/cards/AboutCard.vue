@@ -1,11 +1,12 @@
 <template>
   <draggable-card
-      :initial-width="isMobile ? vw(90) : vw(56)"
-      :initial-height="vh(65)"
-      :initial-x="vw(2)"
-      :initial-y="isMobile ? vh(2) : vh(8)"
-      :min-width="100"
-      :min-height="100"
+    title="About"
+    :initial-width="isMobile ? vw(90) : vw(56)"
+    :initial-height="vh(65)"
+    :initial-x="vw(2)"
+    :initial-y="isMobile ? vh(2) : vh(8)"
+    :min-width="100"
+    :min-height="100"
   >
     <header class="header">
       <div>

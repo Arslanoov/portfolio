@@ -15,9 +15,7 @@
   >
     <div class="draggable">
       <div class="draggable__header">
-        <h3 class="draggable__title">
-          <slot name="header">Articles</slot>
-        </h3>
+        <h3 class="draggable__title">{{ title }}</h3>
       </div>
       <div class="draggable__container">
         <slot />
@@ -31,14 +29,15 @@ import { ref, defineProps } from 'vue'
 
 import throttle from '../../utils/throttle.js'
 
-const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, name } = defineProps({
+const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, name, title } = defineProps({
   initialWidth: Number,
   initialHeight: Number,
   initialX: Number,
   initialY: Number,
   minWidth: Number,
   minHeight: Number,
-  name: String
+  name: String,
+  title: String
 })
 
 const getStorageData = (prop) => Number(localStorage.getItem(`card_${name}_${prop}`)) ?? 0

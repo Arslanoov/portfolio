@@ -1,5 +1,6 @@
 <template>
   <draggable-card
+    title="Projects"
     :initial-width="isMobile ? vw(80) : vw(30)"
     :initial-height="vh(23)"
     :initial-x="isMobile ? vw(15) : vw(67)"

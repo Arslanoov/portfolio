@@ -1,5 +1,6 @@
 <template>
   <draggable-card
+    title="Articles"
     :initial-width="isMobile ? vw(70) : vw(28)"
     :initial-height="vh(23)"
     :initial-x="isMobile ? vw(2) : vw(65)"
@@ -7,7 +8,7 @@
     :min-width="100"
     :min-height="100"
   >
-    <slot name="header">Articles</slot>
+    <slot name="header" title="Articles 2"></slot>
 
     <slot>
       <section class="articles">
