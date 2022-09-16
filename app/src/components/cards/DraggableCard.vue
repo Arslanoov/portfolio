@@ -13,13 +13,15 @@
     :parent="true"
     :z="active ? 5 : 1"
   >
-    <div class="draggable__header">
-      <h3 class="draggable__title">
-        <slot name="header">Articles</slot>
-      </h3>
-    </div>
-    <div class="draggable__container">
-      <slot />
+    <div class="draggable">
+      <div class="draggable__header">
+        <h3 class="draggable__title">
+          <slot name="header">Articles</slot>
+        </h3>
+      </div>
+      <div class="draggable__container">
+        <slot />
+      </div>
     </div>
   </vue-draggable-resizable>
 </template>
@@ -77,6 +79,11 @@ const hideWindow = () => active.value = false
 
 <style lang="scss" scoped>
 .draggable {
+  width: 100%;
+  height: 100%;
+
+  background: $white;
+
   &__header,
   &__container {
     width: 100%;
@@ -90,9 +97,7 @@ const hideWindow = () => active.value = false
 
     height: 3.5rem;
 
-    border-radius: 0.5rem 0.5rem 0 0;
-
-    background-color: #4f79e3;
+    background-color: $secondary-color;
 
     padding: 0.2rem 2rem;
   }
@@ -103,19 +108,15 @@ const hideWindow = () => active.value = false
 
     text-overflow: ellipsis;
 
-    color: #fff;
+    color: $white;
   }
 
   &__container {
-    height: calc(100% - 2.5rem);
-
-    border-radius: 0 0 0.5rem 0.5rem;
+    height: calc(100% - 3.5rem);
 
     padding: 2rem;
 
     overflow: scroll;
-
-    background: #fff;
   }
 }
 </style>

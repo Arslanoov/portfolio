@@ -4,8 +4,8 @@
     :initial-height="vh(23)"
     :initial-x="isMobile ? vw(15) : vw(67)"
     :initial-y="isMobile ? vh(55) : vh(46)"
-    :min-width="50"
-    :min-height="50"
+    :min-width="100"
+    :min-height="100"
   >
     <section class="projects">
       <h3>{{ t('projects.title') }}</h3>
@@ -70,7 +70,7 @@ const { t, projects, siteUrl } = defineProps({
   }
 
   &__description {
-    color: rgba(#000, 0.5);
+    color: rgba($black, 0.5);
   }
 }
 </style>

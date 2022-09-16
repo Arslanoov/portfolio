@@ -8,7 +8,7 @@ import i18n from './utils/i18n.js'
 import App from './App.vue'
 
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
-import './base.scss'
+import './assets/styles/main.scss'
 
 const app = createApp(App)
 

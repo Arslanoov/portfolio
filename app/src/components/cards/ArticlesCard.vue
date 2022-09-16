@@ -4,8 +4,8 @@
     :initial-height="vh(23)"
     :initial-x="isMobile ? vw(2) : vw(65)"
     :initial-y="isMobile ? vh(70) : vh(12)"
-    :min-width="50"
-    :min-height="50"
+    :min-width="100"
+    :min-height="100"
   >
     <slot name="header">Articles</slot>
 
@@ -74,7 +74,7 @@ const { t, articles, siteUrl } = defineProps({
   }
 
   &__description {
-    color: rgba(#000, 0.5);
+    color: rgba($black, 0.5);
   }
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <img class="home__icon" src="@/assets/images/icon.svg" draggable="false" alt="">
+
     <AboutCard :t="t" name="about" />
     <ArticlesCard :t="t" :site-url="siteUrl" :articles="articles" name="articles" />
     <ProjectsCard :t="t" :site-url="siteUrl" :projects="projects" name="projects" />
@@ -85,8 +87,20 @@ export default {
 
   overflow: hidden;
 
-  background: url("../assets/background.jpg") #fff center top / cover no-repeat fixed;
-  background-size: cover;
+  background-color: $main-color;
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 30rem;
+    height: 30rem;
+
+    user-select: none;
+  }
 }
 </style>
 
