@@ -13,9 +13,9 @@
     <slot>
       <section class="articles">
         <h3>{{ t('articles.title') }}</h3>
-        <template v-if="articles?.items && articles.items.length > 0">
+        <template v-if="store.articles?.items && store.articles.items.length > 0">
           <ul class="articles__list">
-            <li v-for="article in articles.items" class="item" :key="article.id">
+            <li v-for="article in store.articles.items" class="item" :key="article.id">
               <a
                   :href="`${siteUrl}/${article.slug}`"
                   target="_blank"
@@ -39,18 +39,22 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { useContentStore } from '@/stores/contentStore.js'
 
-import { vw, vh } from '../../utils/sizes.js'
-import { isMobile } from '../../utils/sizes.js'
+import { vw, vh } from '@/utils/sizes.js'
+import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const { t, articles, siteUrl } = defineProps({
+const { t, lang, siteUrl } = defineProps({
   t: Function,
-  siteUrl: String,
-  articles: Object
+  lang: String,
+  siteUrl: String
 })
+
+const store = useContentStore()
+
+store.fetchArticles(lang)
 </script>
 
 <style lang="scss">

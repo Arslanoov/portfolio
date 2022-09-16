@@ -1,0 +1,1 @@
+export const FETCH_CONTENT = '/api/content-items/latest'

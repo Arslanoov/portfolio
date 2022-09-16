@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref } from 'vue'
+import { toRefs, ref } from 'vue'
 
-import { formatHours, formatMinutes } from '../../utils/date.js';
+import { formatHours, formatMinutes } from '@/utils/date.js';
 
 const hours = ref()
 const minutes = ref()

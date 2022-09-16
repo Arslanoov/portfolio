@@ -71,8 +71,8 @@
 <script setup>
 import { defineProps } from 'vue'
 
-import { vw, vh } from '../../utils/sizes.js'
-import { isMobile } from '../../utils/sizes.js'
+import { vw, vh } from '@/utils/sizes.js'
+import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 

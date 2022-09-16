@@ -16,6 +16,7 @@
     <div class="draggable">
       <div class="draggable__header">
         <h3 class="draggable__title">{{ title }}</h3>
+        <div @click="onCloseWindow" class="draggable__remove">x</div>
       </div>
       <div class="draggable__container">
         <slot />
@@ -27,9 +28,20 @@
 <script setup>
 import { ref, defineProps } from 'vue'
 
-import throttle from '../../utils/throttle.js'
+import { useWindowsStore } from '@/stores/windowsStore.js'
 
-const { initialWidth, initialHeight, initialX, initialY, minWidth, minHeight, name, title } = defineProps({
+import throttle from '@/utils/throttle.js'
+
+const {
+  initialWidth,
+  initialHeight,
+  initialX,
+  initialY,
+  minWidth,
+  minHeight,
+  name,
+  title
+} = defineProps({
   initialWidth: Number,
   initialHeight: Number,
   initialX: Number,
@@ -55,6 +67,8 @@ const updateStorageData = throttle((name) => {
   localStorage.setItem(`card_${name}_height`, String(Math.min(height.value, window.innerHeight - 20)))
 }, 750)
 
+const windowsStore = useWindowsStore()
+
 const onResize = (newX, newY, newWidth, newHeight) => {
   x.value = newX
   y.value = newY
@@ -74,6 +88,8 @@ const onDrag = (newX, newY) => {
 
 const moveWindow = () => active.value = true
 const hideWindow = () => active.value = false
+
+const onCloseWindow = () => windowsStore.closeWindow(name)
 </script>
 
 <style lang="scss" scoped>
@@ -90,6 +106,7 @@ const hideWindow = () => active.value = false
 
   &__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
     overflow: hidden;
@@ -110,12 +127,34 @@ const hideWindow = () => active.value = false
     color: $white;
   }
 
+  &__remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    background-color: #cc0707;
+    color: #fff;
+
+    font-size: 2.5rem;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__container {
     height: calc(100% - 3.5rem);
 
     padding: 2rem;
 
-    overflow: scroll;
+    overflow: hidden;
+
+    @media screen and (max-width: 768px) {
+      overflow: scroll;
+    }
   }
 }
 </style>

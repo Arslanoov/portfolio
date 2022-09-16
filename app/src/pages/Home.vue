@@ -2,27 +2,31 @@
   <div class="home">
     <img class="home__icon" src="@/assets/images/icon.svg" draggable="false" alt="">
 
-    <AboutCard :t="t" name="about" />
-    <ArticlesCard :t="t" :site-url="siteUrl" :articles="articles" name="articles" />
-    <ProjectsCard :t="t" :site-url="siteUrl" :projects="projects" name="projects" />
+    <template v-for="window in windows" :key="window.name">
+      <component
+          :is="window.component"
+          :t="t"
+          :lang="lang"
+          :name="window.name"
+          :title="window.title"
+      />
+    </template>
     <BottomMenu :change-lang="changeLang" />
   </div>
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import api from '../api'
+import { LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_EN, LANGUAGE_RU } from '@/const/lang'
 
-import { LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_EN, LANGUAGE_RU } from '../const/lang'
-import { ARTICLE_CONTENT_TYPE, PROJECT_CONTENT_TYPE } from '../const/contentType.js'
+import { useWindowsStore } from '@/stores/windowsStore.js'
 
-import AboutCard from '../components/cards/AboutCard.vue'
-import ArticlesCard from '../components/cards/ArticlesCard.vue'
-import ProjectsCard from '../components/cards/ProjectsCard.vue'
-import BottomMenu from "../components/blocks/BottomMenu.vue";
+import AboutCard from '@/components/cards/AboutCard.vue'
+import ArticlesCard from '@/components/cards/ArticlesCard.vue'
+import ProjectsCard from '@/components/cards/ProjectsCard.vue'
+import BottomMenu from '@/components/blocks/BottomMenu.vue'
 
 const siteUrl = import.meta.env.VITE_MAIN_SITE_BASE_URL
 
@@ -34,8 +38,8 @@ export default {
     ProjectsCard
   },
   setup() {
-    const projects = ref([])
-    const articles = ref([])
+    const store = useWindowsStore()
+
     const route = useRoute()
 
     let lang = route.params.lang
@@ -47,29 +51,11 @@ export default {
       locale: lang,
       inheritLocale: true
     })
+
     locale.value = lang
 
-    onMounted(async () => {
-      const { data: projectsData } = await api.get('/api/content-items/latest', {
-        params: {
-          lang,
-          type: PROJECT_CONTENT_TYPE
-        }
-      });
-      projects.value = projectsData
-
-      const { data: articlesData } = await api.get('/api/content-items/latest', {
-        params: {
-          lang,
-          type: ARTICLE_CONTENT_TYPE
-        }
-      });
-      articles.value = articlesData
-    })
-
     return {
-      projects,
-      articles,
+      windows: store.windows,
       lang,
       changeLang: lang === LANGUAGE_RU ? LANGUAGE_EN : LANGUAGE_RU,
       siteUrl: `${siteUrl}/${locale.value}`,

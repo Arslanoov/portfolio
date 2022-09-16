@@ -10,9 +10,9 @@
   >
     <section class="projects">
       <h3>{{ t('projects.title') }}</h3>
-      <template v-if="projects?.items && projects.items.length > 0">
+      <template v-if="store.projects?.items && store.projects.items.length > 0">
         <ul class="projects__list">
-          <li v-for="project in projects.items" class="item" :key="project.id">
+          <li v-for="project in store.projects.items" class="item" :key="project.id">
             <a
                 :href="`${siteUrl}/${project.slug}`"
                 target="_blank"
@@ -35,18 +35,22 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { useContentStore } from '@/stores/contentStore.js'
 
-import { vw, vh } from '../../utils/sizes.js'
-import { isMobile } from '../../utils/sizes.js'
+import { vw, vh } from '@/utils/sizes.js'
+import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const { t, projects, siteUrl } = defineProps({
+const { t, lang, siteUrl } = defineProps({
   t: Function,
-  siteUrl: String,
-  projects: Object
+  lang: String,
+  siteUrl: String
 })
+
+const store = useContentStore()
+
+store.fetchProjects(lang)
 </script>
 
 <style lang="scss" scoped>
