@@ -6,19 +6,24 @@ import ArticlesCard from '@/components/cards/ArticlesCard.vue'
 export const ABOUT_WINDOW = {
   name: 'ABOUT',
   title: 'About',
+  icon: 'about.svg',
   component: shallowRef(AboutCard)
 }
 
 export const PROJECTS_WINDOW = {
   name: 'PROJECTS',
   title: 'Projects',
+  icon: 'projects.svg',
   component: shallowRef(ProjectsCard)
 }
 
 export const ARTICLES_WINDOW = {
   name: 'ARTICLES',
   title: 'Articles',
+  icon: 'articles.svg',
   component: shallowRef(ArticlesCard)
 }
 
 export const DEFAULT_OPENED_WINDOWS = [ABOUT_WINDOW, PROJECTS_WINDOW, ARTICLES_WINDOW]
+
+export const ALL_WINDOWS = [ABOUT_WINDOW, PROJECTS_WINDOW, ARTICLES_WINDOW]

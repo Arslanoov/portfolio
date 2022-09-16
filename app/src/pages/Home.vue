@@ -2,6 +2,8 @@
   <div class="home">
     <img class="home__icon" src="@/assets/images/icon.svg" draggable="false" alt="">
 
+    <Icons />
+
     <template v-for="window in windows" :key="window.name">
       <component
           :is="window.component"
@@ -27,11 +29,13 @@ import AboutCard from '@/components/cards/AboutCard.vue'
 import ArticlesCard from '@/components/cards/ArticlesCard.vue'
 import ProjectsCard from '@/components/cards/ProjectsCard.vue'
 import BottomMenu from '@/components/blocks/BottomMenu.vue'
+import Icons from '@/components/blocks/Icons.vue'
 
 const siteUrl = import.meta.env.VITE_MAIN_SITE_BASE_URL
 
 export default {
   components: {
+    Icons,
     BottomMenu,
     AboutCard,
     ArticlesCard,
@@ -72,6 +76,8 @@ export default {
   height: 100vh;
 
   overflow: hidden;
+
+  padding: 2rem;
 
   background-color: $main-color;
 
