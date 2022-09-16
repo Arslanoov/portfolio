@@ -96,6 +96,7 @@ export default {
 <i18n>
 {
   "en": {
+    "about": "About",
     "header": {
       "title": "Hi! I'm Rasul Arslanov",
       "subtitle": "Frontend developer with 3+ years of experience"
@@ -123,6 +124,7 @@ export default {
     }
   },
   "ru": {
+    "about": "Обо мне",
     "header": {
       "title": "Привет! Я Расуль Арсланов",
       "subtitle": "Фронтенд разработчик с 3+ годами опыта"

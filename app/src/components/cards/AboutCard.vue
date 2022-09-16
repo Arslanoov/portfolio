@@ -1,6 +1,6 @@
 <template>
   <draggable-card
-    title="About"
+    :title="t('about')"
     :initial-width="isMobile ? vw(90) : vw(56)"
     :initial-height="vh(65)"
     :initial-x="vw(2)"

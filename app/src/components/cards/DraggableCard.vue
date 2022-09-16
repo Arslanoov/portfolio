@@ -148,7 +148,7 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
   &__container {
     height: calc(100% - 3.5rem);
 
-    padding: 2rem;
+    padding: 1rem 2rem;
 
     overflow-y: scroll;
     overflow-x: hidden;
