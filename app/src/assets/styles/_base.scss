@@ -8,6 +8,11 @@ body {
     overflow: hidden;
 }
 
+html,
+body {
+    position: fixed;
+}
+
 *,
 *::before,
 *::after {

@@ -3,8 +3,8 @@
     :title="t('articles.title')"
     :initial-width="isMobile ? vw(70) : vw(28)"
     :initial-height="vh(30)"
-    :initial-x="isMobile ? vw(2) : vw(65)"
-    :initial-y="isMobile ? vh(70) : vh(12)"
+    :initial-x="isMobile ? vw(4) : vw(65)"
+    :initial-y="isMobile ? vh(60) : vh(12)"
     :min-width="100"
     :min-height="100"
   >
