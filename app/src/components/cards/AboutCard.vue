@@ -1,11 +1,12 @@
 <template>
   <draggable-card
-      :initial-width="isMobile ? vw(90) : vw(56)"
-      :initial-height="vh(65)"
-      :initial-x="vw(2)"
-      :initial-y="isMobile ? vh(2) : vh(8)"
-      :min-width="50"
-      :min-height="50"
+    title="About"
+    :initial-width="isMobile ? vw(90) : vw(56)"
+    :initial-height="vh(65)"
+    :initial-x="vw(2)"
+    :initial-y="isMobile ? vh(2) : vh(8)"
+    :min-width="100"
+    :min-height="100"
   >
     <header class="header">
       <div>
@@ -70,8 +71,8 @@
 <script setup>
 import { defineProps } from 'vue'
 
-import { vw, vh } from '../../utils/sizes.js'
-import { isMobile } from '../../utils/sizes.js'
+import { vw, vh } from '@/utils/sizes.js'
+import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
@@ -130,7 +131,7 @@ const { t } = defineProps({
 .footer {
   padding-top: 1rem;
 
-  border-top: .1rem solid rgba(#000, 0.1);
+  border-top: .1rem solid rgba($black, 0.1);
 
   font-size: 1.7rem;
 }
@@ -140,7 +141,7 @@ const { t } = defineProps({
   flex-wrap: wrap;
   align-items: center;
 
-  margin-top: 1rem;
+  margin: 1rem 0 0;
   padding: 0;
 
   list-style: none;

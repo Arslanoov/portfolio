@@ -1,28 +1,23 @@
 <template>
   <draggable-card
+    :title="t('articles.title')"
     :initial-width="isMobile ? vw(70) : vw(28)"
     :initial-height="vh(23)"
     :initial-x="isMobile ? vw(2) : vw(65)"
     :initial-y="isMobile ? vh(70) : vh(12)"
-    :min-width="50"
-    :min-height="50"
+    :min-width="100"
+    :min-height="100"
   >
-    <slot name="header">Articles</slot>
-
     <slot>
       <section class="articles">
         <h3>{{ t('articles.title') }}</h3>
-        <template v-if="articles?.items && articles.items.length > 0">
+        <template v-if="contentStore.articles?.items && contentStore.articles.items.length > 0">
           <ul class="articles__list">
-            <li v-for="article in articles.items" class="item" :key="article.id">
-              <a
-                  :href="`${siteUrl}/${article.slug}`"
-                  target="_blank"
-                  class="item__link"
-              >
+            <li v-for="article in contentStore.articles.items" class="item" :key="article.id">
+              <div class="item__title" @click="onOpen(article.id, article.slug)">
                 {{ article.title }}
                 <img v-if="article.cover" :src="article.cover" class="item__cover" alt="">
-              </a>
+              </div>
               <p v-if="article.description" class="item__description">
                 {{ article.description }}
               </p>
@@ -38,18 +33,30 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { useContentStore } from '@/stores/contentStore.js'
+import { useWindowsStore } from '@/stores/windowsStore.js'
 
-import { vw, vh } from '../../utils/sizes.js'
-import { isMobile } from '../../utils/sizes.js'
+import { CONTENT_ITEM_CARD } from '@/const/windows.js'
+
+import { vw, vh } from '@/utils/sizes.js'
+import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const { t, articles, siteUrl } = defineProps({
+const { t, lang } = defineProps({
   t: Function,
-  siteUrl: String,
-  articles: Object
+  lang: String
 })
+
+const contentStore = useContentStore()
+const windowsStore = useWindowsStore()
+
+contentStore.fetchArticles(lang)
+
+const onOpen = (id, slug) => {
+  contentStore.fetchData(id, slug)
+  windowsStore.openCustomWindow(id, slug)
+}
 </script>
 
 <style lang="scss">
@@ -60,6 +67,12 @@ const { t, articles, siteUrl } = defineProps({
 .item {
   &:not(:last-of-type) {
     margin-bottom: 1.5rem;
+  }
+  
+  &__title {
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__link {
@@ -74,7 +87,7 @@ const { t, articles, siteUrl } = defineProps({
   }
 
   &__description {
-    color: rgba(#000, 0.5);
+    color: rgba($black, 0.5);
   }
 }
 </style>

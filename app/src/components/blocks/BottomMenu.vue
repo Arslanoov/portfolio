@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref } from 'vue'
+import { toRefs, ref } from 'vue'
 
-import { formatHours, formatMinutes } from '../../utils/date.js';
+import { formatHours, formatMinutes } from '@/utils/date.js';
 
 const hours = ref()
 const minutes = ref()
@@ -50,17 +50,19 @@ const {
   justify-content: space-between;
   align-items: center;
 
+  border-top: 2px solid $grey;
+
   height: 3rem;
 
   padding: 0 3rem;
 
-  background-color: #2254d3;
+  background-color: $silver;
 
   font-size: 1.6rem;
 
   &,
   &__link {
-    color: #fff;
+    color: $white;
   }
 }
 </style>

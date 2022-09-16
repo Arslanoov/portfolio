@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'MS Sans Serif';
+    src: url('../fonts/MS-Sans-Serif.eot');
+    src: url('../fonts/MS-Sans-Serif.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/MS-Sans-Serif.woff') format('woff'),
+    url('../fonts/MS-Sans-Serif.ttf')  format('truetype');
+}
+
+body {
+    font-family: 'MS Sans Serif', sans-serif;
+}
