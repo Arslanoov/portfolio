@@ -1,7 +1,7 @@
 <template>
   <div class="icons">
     <div
-        v-for="window in ALL_WINDOWS"
+        v-for="window in DESKTOP_WINDOWS"
         @click="() => store.openWindow(window.name)"
         :key="window.name"
         class="icon"
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ALL_WINDOWS } from '@/const/windows.js'
+import { DESKTOP_WINDOWS } from '@/const/windows.js'
 
 import { useWindowsStore } from '@/stores/windowsStore.js'
 

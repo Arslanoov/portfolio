@@ -1,14 +1,15 @@
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
 
 import api from '@/api';
 
 import { ARTICLE_CONTENT_TYPE, PROJECT_CONTENT_TYPE } from '@/const/contentType.js'
-import { FETCH_CONTENT } from '@/const/api.js'
+import {FETCH_CONTENT, FETCH_CONTENT_ITEM} from '@/const/api.js'
 
 export const useContentStore = defineStore('content', () => {
   const articles = ref([])
   const projects = ref([])
+  const fetchedItems = reactive({})
 
   const fetchProjects = async (lang) => {
     const { data: projectsData } = await api.get(FETCH_CONTENT, {
@@ -30,10 +31,20 @@ export const useContentStore = defineStore('content', () => {
     articles.value = articlesData
   }
 
+  const fetchData = async (id, slug) => {
+    if (fetchedItems[id]) return
+
+    const { data } = await api.get(FETCH_CONTENT_ITEM(slug))
+
+    fetchedItems[id] = data
+  }
+
   return {
     articles,
     projects,
+    fetchedItems,
     fetchArticles,
-    fetchProjects
+    fetchProjects,
+    fetchData
   }
 })

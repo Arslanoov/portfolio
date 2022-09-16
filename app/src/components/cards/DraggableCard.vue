@@ -58,7 +58,7 @@ const width = ref(getStorageData('width') || initialWidth)
 const height = ref(getStorageData('height') || initialHeight)
 const x = ref(getStorageData('x') || initialX)
 const y = ref(getStorageData('y') || initialY)
-const active = ref(false)
+const active = ref(true)
 
 const updateStorageData = throttle((name) => {
   localStorage.setItem(`card_${name}_x`, String(Math.min(x.value, window.innerWidth - 20)))
@@ -150,11 +150,8 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
 
     padding: 2rem;
 
-    overflow: hidden;
-
-    @media screen and (max-width: 768px) {
-      overflow: scroll;
-    }
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
 </style>

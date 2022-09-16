@@ -1,6 +1,6 @@
 <template>
   <draggable-card
-    title="Projects"
+    :title="t('projects.title')"
     :initial-width="isMobile ? vw(80) : vw(30)"
     :initial-height="vh(23)"
     :initial-x="isMobile ? vw(15) : vw(67)"
@@ -9,18 +9,13 @@
     :min-height="100"
   >
     <section class="projects">
-      <h3>{{ t('projects.title') }}</h3>
-      <template v-if="store.projects?.items && store.projects.items.length > 0">
+      <template v-if="contentStore.projects?.items && contentStore.projects.items.length > 0">
         <ul class="projects__list">
-          <li v-for="project in store.projects.items" class="item" :key="project.id">
-            <a
-                :href="`${siteUrl}/${project.slug}`"
-                target="_blank"
-                class="item__link"
-            >
+          <li v-for="project in contentStore.projects.items" class="item" :key="project.id">
+            <div class="item__title" @click="onOpen(project.id, project.slug)">
               {{ project.title }}
               <img v-if="project.cover" :src="project.cover" class="item__cover" alt="">
-            </a>
+            </div>
             <p v-if="project.description" class="item__description">
               {{ project.description }}
             </p>
@@ -36,21 +31,29 @@
 
 <script setup>
 import { useContentStore } from '@/stores/contentStore.js'
+import { useWindowsStore } from '@/stores/windowsStore.js'
 
 import { vw, vh } from '@/utils/sizes.js'
 import { isMobile } from '@/utils/sizes.js'
 
+import { CONTENT_ITEM_CARD } from '@/const/windows.js'
+
 import DraggableCard from './DraggableCard.vue'
 
-const { t, lang, siteUrl } = defineProps({
+const { t, lang } = defineProps({
   t: Function,
-  lang: String,
-  siteUrl: String
+  lang: String
 })
 
-const store = useContentStore()
+const contentStore = useContentStore()
+const windowsStore = useWindowsStore()
 
-store.fetchProjects(lang)
+contentStore.fetchProjects(lang)
+
+const onOpen = (id, slug) => {
+  contentStore.fetchData(id, slug)
+  windowsStore.openCustomWindow(id, slug)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +64,12 @@ store.fetchProjects(lang)
 .item {
   &:not(:last-of-type) {
     margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__link {

@@ -10,7 +10,6 @@
           :t="t"
           :lang="lang"
           :name="window.name"
-          :title="window.title"
       />
     </template>
     <BottomMenu :change-lang="changeLang" />
@@ -76,8 +75,6 @@ export default {
   height: 100vh;
 
   overflow: hidden;
-
-  padding: 2rem;
 
   background-color: $main-color;
 
