@@ -111,7 +111,7 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
 
     overflow: hidden;
 
-    height: 3.5rem;
+    min-height: 3.5rem;
 
     background-color: $secondary-color;
 
