@@ -23,6 +23,7 @@ import { useI18n } from 'vue-i18n'
 import { LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_EN, LANGUAGE_RU } from '@/const/lang'
 
 import { useWindowsStore } from '@/stores/windowsStore.js'
+import { useContentStore } from '@/stores/contentStore.js'
 
 import AboutCard from '@/components/cards/AboutCard.vue'
 import ArticlesCard from '@/components/cards/ArticlesCard.vue'
@@ -41,7 +42,8 @@ export default {
     ProjectsCard
   },
   setup() {
-    const store = useWindowsStore()
+    const windowsStore = useWindowsStore()
+    const contentStore = useContentStore()
 
     const route = useRoute()
 
@@ -57,8 +59,15 @@ export default {
 
     locale.value = lang
 
+    const id = route.query.id
+    const slug = route.query.slug
+    if (id && slug) {
+      contentStore.fetchData(id, slug)
+      windowsStore.openCustomWindow(id, slug)
+    }
+
     return {
-      windows: store.windows,
+      windows: windowsStore.windows,
       lang,
       changeLang: lang === LANGUAGE_RU ? LANGUAGE_EN : LANGUAGE_RU,
       siteUrl: `${siteUrl}/${locale.value}`,

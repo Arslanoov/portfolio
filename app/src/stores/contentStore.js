@@ -34,9 +34,18 @@ export const useContentStore = defineStore('content', () => {
   const fetchData = async (id, slug) => {
     if (fetchedItems[id]) return
 
-    const { data } = await api.get(FETCH_CONTENT_ITEM(slug))
+    try {
+      const { data } = await api.get(FETCH_CONTENT_ITEM(slug))
 
-    fetchedItems[id] = data
+      fetchedItems[id] = {
+        success: true,
+        data
+      }
+    } catch (e) {
+      fetchedItems[id] = {
+        success: false
+      }
+    }
   }
 
   return {

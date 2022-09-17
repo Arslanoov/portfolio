@@ -1,7 +1,7 @@
 <template>
   <draggable-card
     :name="name"
-    :title="currentItem?.title ?? ''"
+    :title="currentItem?.data?.title ?? ''"
     :initial-width="isMobile ? vw(85) : vw(60)"
     :initial-height="vh(55)"
     :initial-x="isMobile ? vw(2) : vw(11)"
@@ -10,20 +10,26 @@
     :min-height="150"
   >
     <slot>
-      <template v-if="currentItem">
-        <section class="content-item">
+      <template v-if="currentItem?.success">
+        <section v-if="currentItem.data" class="content-item">
           <p
-            v-if="currentItem.description.trim('').length > 0"
+            v-if="currentItem.data.description.trim('').length > 0"
             class="content-item__description"
           >
-            {{ currentItem.description }}
+            {{ currentItem.data.description }}
           </p>
 
           <div
             class="content-item__content"
-            v-html="currentItem.rawContent"
+            v-html="currentItem.data.rawContent"
           />
         </section>
+        <div class="content-item__text" v-else>
+          Fetching...
+        </div>
+      </template>
+      <template v-else>
+        <div class="content-item__text">Content Fetch Error</div>
       </template>
     </slot>
   </draggable-card>
@@ -107,5 +113,9 @@ const currentItem = computed(() => store.fetchedItems[id])
 <style lang="scss" scoped>
 .articles {
   font-size: 1.8rem;
+}
+
+.content-item__text {
+  font-size: 2rem;
 }
 </style>
