@@ -3,10 +3,10 @@
     :title="t('about')"
     :initial-width="isMobile ? vw(90) : vw(56)"
     :initial-height="vh(65)"
-    :initial-x="vw(2)"
+    :initial-x="isMobile ? vw(2) : vw(8)"
     :initial-y="isMobile ? vh(2) : vh(8)"
-    :min-width="100"
-    :min-height="100"
+    :min-width="200"
+    :min-height="150"
   >
     <header class="header">
       <div>
@@ -18,17 +18,23 @@
     <div class="description">
       <div class="description__text">
         <p class="description__paragraph">
-          {{ t('description.paragraph1') }}&nbsp;&nbsp;<span>&#128187;</span>
+          {{ t('description.paragraph1') }}&nbsp;&nbsp;
+          <img class="description__icon" src="@/assets/images/monitor.svg" alt="">
         </p>
         <p class="description__paragraph">
-          {{ t('description.paragraph2') }} <span>&#128214;</span>
+          {{ t('description.paragraph2') }}&nbsp;&nbsp;
+          <img class="description__icon" src="@/assets/images/coffee-cup.svg" alt="">
         </p>
         <p class="description__paragraph">
-          {{ t('description.paragraph3') }} <span>&#128200;</span>
+          {{ t('description.paragraph3') }}&nbsp;&nbsp;
+          <img class="description__icon" src="@/assets/images/presentation.svg" alt="">
+        </p>
+        <p class="description__paragraph description__paragraph_collapsed">
+          {{ t('description.paragraph4Part1') }}&nbsp;&nbsp;
+          <img class="description__icon" src="@/assets/images/demiboy.svg" alt="">
         </p>
         <p class="description__paragraph">
-          {{ t('description.paragraph4Part1') }} <span>	&#128156;</span> <br>
-          {{ t('description.paragraph4Part2') }}
+          {{ t('description.paragraph4Part2') }} &nbsp;
           <a href="https://github.com/Arslanoov" target="_blank">GitHub</a>
         </p>
       </div>
@@ -106,20 +112,35 @@ const { t } = defineProps({
     margin-right: 2rem;
     margin-bottom: 2rem;
 
-    user-select: none;
-
     float: left;
   }
 
+  &__icon {
+    width: 3rem;
+
+    margin-left: 0.5rem;
+  }
+
   &__paragraph {
+    display: flex;
+    align-items: flex-end;
+
     font-size: 1.7rem;
+
+    &_collapsed {
+      margin-bottom: 0;
+    }
+
+    &:first-of-type .description__icon {
+      width: 2.5rem;
+    }
+
+    &:nth-of-type(3) .description__icon {
+      width: 3.5rem;
+    }
 
     &:not(:last-of-type) {
       margin-bottom: 0.7rem;
-    }
-
-    span {
-      font-size: 2rem;
     }
   }
 

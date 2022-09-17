@@ -7,7 +7,7 @@
     :initial-x="isMobile ? vw(2) : vw(11)"
     :initial-y="isMobile ? vh(15) : vh(12)"
     :min-width="200"
-    :min-height="100"
+    :min-height="150"
   >
     <slot>
       <template v-if="currentItem">

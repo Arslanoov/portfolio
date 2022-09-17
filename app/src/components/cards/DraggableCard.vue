@@ -9,6 +9,8 @@
     @dragging="onDrag"
     @resizing="onResize"
     @click="moveWindow"
+    drag-cancel=".draggable__container"
+    @dblclick="onFullscreenWindow"
     v-click-away="hideWindow"
     :parent="true"
     :z="active ? 5 : 1"
@@ -16,7 +18,11 @@
     <div class="draggable">
       <div class="draggable__header">
         <h3 class="draggable__title">{{ title }}</h3>
-        <div @click="onCloseWindow" class="draggable__remove">x</div>
+        <div class="draggable__actions">
+          <div @click="onFullscreenWindow" class="draggable__action draggable__fullscreen">o</div>
+          <div @click="onSmallFullscreenWindow" class="draggable__action draggable__small">-</div>
+          <div @click="onCloseWindow" class="draggable__action draggable__remove">x</div>
+        </div>
       </div>
       <div class="draggable__container">
         <slot />
@@ -31,6 +37,7 @@ import { ref, defineProps } from 'vue'
 import { useWindowsStore } from '@/stores/windowsStore.js'
 
 import throttle from '@/utils/throttle.js'
+import {vw, vh, isMobile} from '@/utils/sizes.js'
 
 const {
   initialWidth,
@@ -89,6 +96,26 @@ const onDrag = (newX, newY) => {
 const moveWindow = () => active.value = true
 const hideWindow = () => active.value = false
 
+const onFullscreenWindow = () => {
+  x.value = vw(1)
+  y.value = vh(1)
+  active.value = true
+
+  window.setTimeout(() => {
+    width.value = vw(98)
+    height.value = vh(93)
+
+    updateStorageData(name)
+  }, 100)
+}
+
+const onSmallFullscreenWindow = () => {
+  width.value = isMobile ? vw(70) : vw(30)
+  height.value = isMobile  ? vh(30) : vh(20)
+
+  updateStorageData(name)
+}
+
 const onCloseWindow = () => windowsStore.closeWindow(name)
 </script>
 
@@ -96,8 +123,6 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
 .draggable {
   width: 100%;
   height: 100%;
-
-  background: $white;
 
   &__header,
   &__container {
@@ -127,7 +152,12 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
     color: $white;
   }
 
-  &__remove {
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+   &__action {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,14 +165,31 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
     width: 2.5rem;
     height: 2.5rem;
 
-    background-color: #cc0707;
-    color: #fff;
+    color: $white;
 
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     
     &:hover {
       cursor: pointer;
     }
+
+     &:not(:last-of-type)  {
+       margin-right: 1rem;
+     }
+  }
+
+  &__fullscreen {
+    background-color: $green;
+  }
+
+  &__small {
+    font-size: 4rem;
+
+    background-color: $yellow;
+  }
+
+  &__remove {
+    background-color: $red;
   }
 
   &__container {
@@ -152,6 +199,10 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
 
     overflow-y: scroll;
     overflow-x: hidden;
+
+    border: 0.1rem dashed $black;
+
+    background: $white;
   }
 }
 </style>

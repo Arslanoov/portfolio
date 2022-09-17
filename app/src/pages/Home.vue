@@ -76,6 +76,8 @@ export default {
 
   overflow: hidden;
 
+  user-select: none;
+
   background-color: $main-color;
 
   &__icon {
@@ -87,8 +89,6 @@ export default {
 
     width: 30rem;
     height: 30rem;
-
-    user-select: none;
   }
 }
 </style>
