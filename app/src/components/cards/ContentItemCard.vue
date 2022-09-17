@@ -12,7 +12,11 @@
     <slot>
       <template v-if="currentItem">
         <section class="content-item">
-          <p v-if="currentItem.description" class="content-item__description">{{ currentItem.description }}</p>
+          <p
+            v-if="currentItem.description.trim('').length > 0"
+            class="content-item__description">
+            {{ currentItem.description }}
+          </p>
 
           <div
             class="content-item__content"
