@@ -59,6 +59,8 @@ const store = useWindowsStore()
 
     text-align: center;
 
+    white-space: nowrap;
+
     color: $light-silver;
   }
 }
