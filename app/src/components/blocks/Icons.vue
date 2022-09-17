@@ -57,6 +57,8 @@ const store = useWindowsStore()
   &__title {
     font-size: 1.8rem;
 
+    text-align: center;
+
     color: $light-silver;
   }
 }
