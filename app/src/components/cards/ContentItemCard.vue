@@ -14,7 +14,8 @@
         <section class="content-item">
           <p
             v-if="currentItem.description.trim('').length > 0"
-            class="content-item__description">
+            class="content-item__description"
+          >
             {{ currentItem.description }}
           </p>
 
@@ -83,15 +84,21 @@ const currentItem = computed(() => store.fetchedItems[id])
   &__content {
     padding-top: 1rem;
 
-    ul {
-      margin: 0 0 0 3rem;
+    ul,
+    ol {
+      margin: 0 0 1.5rem 3rem;
       padding: 0;
     }
 
-    br {
-      display: block;
-      content: "";
-      margin-top: 1.2rem;
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 2rem;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
     }
   }
 }
