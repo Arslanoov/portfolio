@@ -2,7 +2,7 @@
   <div class="home">
     <img class="home__icon" src="@/assets/images/icon.svg" draggable="false" alt="">
 
-    <Icons />
+    <Icons :t="t" />
 
     <template v-for="window in windows" :key="window.name">
       <component
@@ -97,6 +97,9 @@ export default {
 {
   "en": {
     "about": "About",
+    "About": "About",
+    "Projects": "Projects",
+    "Articles": "Articles",
     "header": {
       "title": "Hi! I'm Rasul Arslanov",
       "subtitle": "Frontend developer with 3+ years of experience"
@@ -125,6 +128,9 @@ export default {
   },
   "ru": {
     "about": "Обо мне",
+    "About": "Обо мне",
+    "Projects": "Проекты",
+    "Articles": "Статьи",
     "header": {
       "title": "Привет! Я Расуль Арсланов",
       "subtitle": "Фронтенд разработчик с 3+ годами опыта"
