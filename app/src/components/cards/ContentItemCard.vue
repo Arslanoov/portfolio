@@ -16,7 +16,7 @@
 
           <div
             class="content-item__content"
-            v-html="currentItem.rawContent.replace(/(\\r)*\\n/g, '<br>').slice(1, -1)"
+            v-html="currentItem.rawContent"
           />
         </section>
       </template>
