@@ -3,10 +3,10 @@
     :title="t('projects.title')"
     :initial-width="isMobile ? vw(80) : vw(30)"
     :initial-height="vh(28)"
-    :initial-x="isMobile ? vw(15) : vw(67)"
-    :initial-y="isMobile ? vh(55) : vh(46)"
-    :min-width="100"
-    :min-height="100"
+    :initial-x="isMobile ? vw(15) : vw(68)"
+    :initial-y="isMobile ? vh(45) : vh(46)"
+    :min-width="200"
+    :min-height="150"
   >
     <section class="projects">
       <template v-if="contentStore.projects?.items && contentStore.projects.items.length > 0">

@@ -7,7 +7,7 @@
         class="icon"
     >
       <img :src="`/windows/${window.icon}`" class="icon__img" draggable="false" alt="">
-      <h4 class="icon__title">{{ window.title }}</h4>
+      <h4 class="icon__title">{{ t(window.title) }}</h4>
     </div>
   </div>
 </template>
@@ -16,6 +16,10 @@
 import { DESKTOP_WINDOWS } from '@/const/windows.js'
 
 import { useWindowsStore } from '@/stores/windowsStore.js'
+
+const { t } = defineProps({
+  t: Function
+})
 
 const store = useWindowsStore()
 </script>
