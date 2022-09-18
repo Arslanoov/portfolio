@@ -1,27 +1,42 @@
 <template>
   <vue-draggable-resizable
+    v-click-away="hideWindow"
     :w="width"
     :h="height"
     :x="x"
     :y="y"
     :min-width="minWidth"
     :min-height="minHeight"
+    drag-cancel=".draggable__container"
+    :parent="true"
+    :z="active ? 5 : 1"
     @dragging="onDrag"
     @resizing="onResize"
     @click="moveWindow"
-    drag-cancel=".draggable__container"
     @dblclick="onFullscreenWindow"
-    v-click-away="hideWindow"
-    :parent="true"
-    :z="active ? 5 : 1"
   >
     <div class="draggable">
       <div class="draggable__header">
         <h3 class="draggable__title">{{ title }}</h3>
         <div class="draggable__actions">
-          <div @click="onFullscreenWindow" class="draggable__action draggable__fullscreen">o</div>
-          <div @click="onSmallFullscreenWindow" class="draggable__action draggable__small">-</div>
-          <div @click="onCloseWindow" class="draggable__action draggable__remove">x</div>
+          <div
+            class="draggable__action draggable__fullscreen"
+            @click="onFullscreenWindow"
+          >
+            o
+          </div>
+          <div
+            class="draggable__action draggable__small"
+            @click="onSmallFullscreenWindow"
+          >
+            -
+          </div>
+          <div
+            class="draggable__action draggable__remove"
+            @click="onCloseWindow"
+          >
+            x
+          </div>
         </div>
       </div>
       <div class="draggable__container">
@@ -32,12 +47,12 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 
 import { useWindowsStore } from '@/stores/windowsStore.js'
 
 import throttle from '@/utils/throttle.js'
-import {vw, vh, isMobile} from '@/utils/sizes.js'
+import { vw, vh, isMobile } from '@/utils/sizes.js'
 
 const {
   initialWidth,
@@ -47,7 +62,7 @@ const {
   minWidth,
   minHeight,
   name,
-  title
+  title,
 } = defineProps({
   initialWidth: Number,
   initialHeight: Number,
@@ -56,10 +71,11 @@ const {
   minWidth: Number,
   minHeight: Number,
   name: String,
-  title: String
+  title: String,
 })
 
-const getStorageData = (prop) => Number(localStorage.getItem(`card_${name}_${prop}`)) ?? 0
+const getStorageData = (prop) =>
+  Number(localStorage.getItem(`card_${name}_${prop}`)) ?? 0
 
 const width = ref(getStorageData('width') || initialWidth)
 const height = ref(getStorageData('height') || initialHeight)
@@ -68,10 +84,22 @@ const y = ref(getStorageData('y') || initialY)
 const active = ref(true)
 
 const updateStorageData = throttle((name) => {
-  localStorage.setItem(`card_${name}_x`, String(Math.min(x.value, window.innerWidth - 20)))
-  localStorage.setItem(`card_${name}_y`, String(Math.min(y.value, window.innerHeight - 20)))
-  localStorage.setItem(`card_${name}_width`, String(Math.min(width.value, window.innerWidth - 20)))
-  localStorage.setItem(`card_${name}_height`, String(Math.min(height.value, window.innerHeight - 20)))
+  localStorage.setItem(
+    `card_${name}_x`,
+    String(Math.min(x.value, window.innerWidth - 20))
+  )
+  localStorage.setItem(
+    `card_${name}_y`,
+    String(Math.min(y.value, window.innerHeight - 20))
+  )
+  localStorage.setItem(
+    `card_${name}_width`,
+    String(Math.min(width.value, window.innerWidth - 20))
+  )
+  localStorage.setItem(
+    `card_${name}_height`,
+    String(Math.min(height.value, window.innerHeight - 20))
+  )
 }, 750)
 
 const windowsStore = useWindowsStore()
@@ -93,8 +121,8 @@ const onDrag = (newX, newY) => {
   updateStorageData(name)
 }
 
-const moveWindow = () => active.value = true
-const hideWindow = () => active.value = false
+const moveWindow = () => (active.value = true)
+const hideWindow = () => (active.value = false)
 
 const onFullscreenWindow = () => {
   x.value = vw(1)
@@ -111,7 +139,7 @@ const onFullscreenWindow = () => {
 
 const onSmallFullscreenWindow = () => {
   width.value = isMobile ? vw(70) : vw(30)
-  height.value = isMobile  ? vh(30) : vh(20)
+  height.value = isMobile ? vh(30) : vh(20)
 
   updateStorageData(name)
 }
@@ -157,7 +185,7 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
     align-items: center;
   }
 
-   &__action {
+  &__action {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,14 +196,14 @@ const onCloseWindow = () => windowsStore.closeWindow(name)
     color: $white;
 
     font-size: 2.2rem;
-    
+
     &:hover {
       cursor: pointer;
     }
 
-     &:not(:last-of-type)  {
-       margin-right: 1rem;
-     }
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
   }
 
   &__fullscreen {

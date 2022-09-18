@@ -1,22 +1,22 @@
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    overflow: hidden;
+  overflow: hidden;
 }
 
 html,
 body {
-    position: fixed;
+  position: fixed;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html,
@@ -26,6 +26,6 @@ h1,
 h2,
 h3,
 h4 {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }

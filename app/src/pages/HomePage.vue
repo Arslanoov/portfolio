@@ -1,15 +1,20 @@
 <template>
   <div class="home">
-    <img class="home__icon" src="@/assets/images/icon.svg" draggable="false" alt="">
+    <img
+      class="home__icon"
+      src="@/assets/images/icon.svg"
+      draggable="false"
+      alt=""
+    />
 
-    <Icons :t="t" />
+    <window-icons :t="t" />
 
     <template v-for="window in windows" :key="window.name">
       <component
-          :is="window.component"
-          :t="t"
-          :lang="lang"
-          :name="window.name"
+        :is="window.component"
+        :t="t"
+        :lang="lang"
+        :name="window.name"
       />
     </template>
     <BottomMenu :change-lang="changeLang" />
@@ -20,51 +25,65 @@
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import { LANGUAGES, DEFAULT_LANGUAGE, LANGUAGE_EN, LANGUAGE_RU } from '@/const/lang'
+import {
+  LANGUAGES,
+  DEFAULT_LANGUAGE,
+  LANGUAGE_EN,
+  LANGUAGE_RU,
+} from '@/const/lang'
 
 import { useWindowsStore } from '@/stores/windowsStore.js'
+import { useContentStore } from '@/stores/contentStore.js'
 
 import AboutCard from '@/components/cards/AboutCard.vue'
 import ArticlesCard from '@/components/cards/ArticlesCard.vue'
 import ProjectsCard from '@/components/cards/ProjectsCard.vue'
 import BottomMenu from '@/components/blocks/BottomMenu.vue'
-import Icons from '@/components/blocks/Icons.vue'
+import WindowIcons from '@/components/blocks/WindowIcons.vue'
 
 const siteUrl = import.meta.env.VITE_MAIN_SITE_BASE_URL
 
 export default {
   components: {
-    Icons,
+    WindowIcons,
     BottomMenu,
     AboutCard,
     ArticlesCard,
-    ProjectsCard
+    ProjectsCard,
   },
   setup() {
-    const store = useWindowsStore()
+    const windowsStore = useWindowsStore()
+    const contentStore = useContentStore()
 
     const route = useRoute()
 
     let lang = route.params.lang
-    if (!lang ||!LANGUAGES.includes(lang)) {
+    if (!lang || !LANGUAGES.includes(lang)) {
       lang = DEFAULT_LANGUAGE
     }
 
     let { t, locale } = useI18n({
       locale: lang,
-      inheritLocale: true
+      inheritLocale: true,
     })
 
     locale.value = lang
 
+    const id = route.query.id
+    const slug = route.query.slug
+    if (id && slug) {
+      contentStore.fetchData(id, slug)
+      windowsStore.openCustomWindow(id, slug)
+    }
+
     return {
-      windows: store.windows,
+      windows: windowsStore.windows,
       lang,
       changeLang: lang === LANGUAGE_RU ? LANGUAGE_EN : LANGUAGE_RU,
       siteUrl: `${siteUrl}/${locale.value}`,
       t,
     }
-  }
+  },
 }
 </script>
 
@@ -100,6 +119,8 @@ export default {
     "About": "About",
     "Projects": "Projects",
     "Articles": "Articles",
+    "fetching": "Fetching",
+    "fetchError": "Content Fetch Error",
     "header": {
       "title": "Hi! I'm Rasul Arslanov",
       "subtitle": "Frontend developer with 3+ years of experience"
@@ -129,6 +150,8 @@ export default {
   "ru": {
     "about": "Обо мне",
     "About": "Обо мне",
+    "fetching": "Загрузка",
+    "fetchError": "Ошибка загрузки",
     "Projects": "Проекты",
     "Articles": "Статьи",
     "header": {

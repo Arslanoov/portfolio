@@ -1,12 +1,17 @@
 <template>
   <div class="icons">
     <div
-        v-for="window in DESKTOP_WINDOWS"
-        @click="() => store.openWindow(window.name)"
-        :key="window.name"
-        class="icon"
+      v-for="window in DESKTOP_WINDOWS"
+      :key="window.name"
+      class="icon"
+      @click="() => store.openWindow(window.name)"
     >
-      <img :src="`/windows/${window.icon}`" class="icon__img" draggable="false" alt="">
+      <img
+        :src="`/windows/${window.icon}`"
+        class="icon__img"
+        draggable="false"
+        alt=""
+      />
       <h4 class="icon__title">{{ t(window.title) }}</h4>
     </div>
   </div>
@@ -18,7 +23,7 @@ import { DESKTOP_WINDOWS } from '@/const/windows.js'
 import { useWindowsStore } from '@/stores/windowsStore.js'
 
 const { t } = defineProps({
-  t: Function
+  t: Function,
 })
 
 const store = useWindowsStore()

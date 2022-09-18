@@ -1,7 +1,7 @@
 <template>
   <draggable-card
     :name="name"
-    :title="currentItem?.title ?? ''"
+    :title="currentItem?.data?.title ?? ''"
     :initial-width="isMobile ? vw(85) : vw(60)"
     :initial-height="vh(55)"
     :initial-x="isMobile ? vw(2) : vw(11)"
@@ -10,15 +10,24 @@
     :min-height="150"
   >
     <slot>
-      <template v-if="currentItem">
-        <section class="content-item">
-          <p v-if="currentItem.description" class="content-item__description">{{ currentItem.description }}</p>
+      <template v-if="currentItem?.success">
+        <section v-if="currentItem.data" class="content-item">
+          <p
+            v-if="currentItem.data.description.trim('').length > 0"
+            class="content-item__description"
+          >
+            {{ currentItem.data.description }}
+          </p>
 
           <div
             class="content-item__content"
-            v-html="currentItem.rawContent.replace(/(\\r)*\\n/g, '<br>').slice(1, -1)"
+            v-html="currentItem.data.rawContent"
           />
         </section>
+        <div v-else class="content-item__text">{{ t('fetching') }}...</div>
+      </template>
+      <template v-else>
+        <div class="content-item__text">{{ t('fetchError') }}</div>
       </template>
     </slot>
   </draggable-card>
@@ -33,10 +42,9 @@ import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const { t, lang, name } = defineProps({
+const { t, name } = defineProps({
   t: Function,
-  lang: String,
-  name: String
+  name: String,
 })
 
 const store = useContentStore()
@@ -79,15 +87,21 @@ const currentItem = computed(() => store.fetchedItems[id])
   &__content {
     padding-top: 1rem;
 
-    ul {
-      margin: 0 0 0 3rem;
+    ul,
+    ol {
+      margin: 0 0 1.5rem 3rem;
       padding: 0;
     }
 
-    br {
-      display: block;
-      content: "";
-      margin-top: 1.2rem;
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 2rem;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
     }
   }
 }
@@ -96,5 +110,9 @@ const currentItem = computed(() => store.fetchedItems[id])
 <style lang="scss" scoped>
 .articles {
   font-size: 1.8rem;
+}
+
+.content-item__text {
+  font-size: 2rem;
 }
 </style>

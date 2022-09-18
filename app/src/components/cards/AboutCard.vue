@@ -19,19 +19,35 @@
       <div class="description__text">
         <p class="description__paragraph">
           {{ t('description.paragraph1') }}&nbsp;&nbsp;
-          <img class="description__icon" src="@/assets/images/monitor.svg" alt="">
+          <img
+            class="description__icon"
+            src="@/assets/images/monitor.svg"
+            alt=""
+          />
         </p>
         <p class="description__paragraph">
           {{ t('description.paragraph2') }}&nbsp;&nbsp;
-          <img class="description__icon" src="@/assets/images/coffee-cup.svg" alt="">
+          <img
+            class="description__icon"
+            src="@/assets/images/coffee-cup.svg"
+            alt=""
+          />
         </p>
         <p class="description__paragraph">
           {{ t('description.paragraph3') }}&nbsp;&nbsp;
-          <img class="description__icon" src="@/assets/images/presentation.svg" alt="">
+          <img
+            class="description__icon"
+            src="@/assets/images/presentation.svg"
+            alt=""
+          />
         </p>
         <p class="description__paragraph description__paragraph_collapsed">
           {{ t('description.paragraph4Part1') }}&nbsp;&nbsp;
-          <img class="description__icon" src="@/assets/images/demiboy.svg" alt="">
+          <img
+            class="description__icon"
+            src="@/assets/images/demiboy.svg"
+            alt=""
+          />
         </p>
         <p class="description__paragraph">
           {{ t('description.paragraph4Part2') }} &nbsp;
@@ -45,22 +61,38 @@
     <footer class="about__footer footer">
       <ul class="footer__contact contacts">
         <li class="contacts__item">
-          <a href="https://www.linkedin.com/in/arslanoov/" target="_blank" class="contacts__item-link">
+          <a
+            href="https://www.linkedin.com/in/arslanoov/"
+            target="_blank"
+            class="contacts__item-link"
+          >
             Linkedin
           </a>
         </li>
         <li class="contacts__item">
-          <a href="https://github.com/Arslanoov" target="_blank" class="contacts__item-link">
+          <a
+            href="https://github.com/Arslanoov"
+            target="_blank"
+            class="contacts__item-link"
+          >
             GitHub
           </a>
         </li>
         <li class="contacts__item">
-          <a href="https://habr.com/ru/users/Arslanoov/" target="_blank" class="contacts__item-link">
+          <a
+            href="https://habr.com/ru/users/Arslanoov/"
+            target="_blank"
+            class="contacts__item-link"
+          >
             Habr
           </a>
         </li>
         <li class="contacts__item">
-          <a href="https://vc.ru/u/979383-rasul-arslanov" target="_blank" class="contacts__item-link">
+          <a
+            href="https://vc.ru/u/979383-rasul-arslanov"
+            target="_blank"
+            class="contacts__item-link"
+          >
             VC
           </a>
         </li>
@@ -75,15 +107,13 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-
 import { vw, vh } from '@/utils/sizes.js'
 import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
 const { t } = defineProps({
-  t: Function
+  t: Function,
 })
 </script>
 
@@ -152,7 +182,7 @@ const { t } = defineProps({
 .footer {
   padding-top: 1rem;
 
-  border-top: .1rem solid rgba($black, 0.1);
+  border-top: 0.1rem solid rgba($black, 0.1);
 
   font-size: 1.7rem;
 }

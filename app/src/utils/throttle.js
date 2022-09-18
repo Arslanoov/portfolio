@@ -14,7 +14,7 @@ function throttle(func, ms) {
 
     isThrottled = true
 
-    setTimeout(function() {
+    setTimeout(function () {
       isThrottled = false
       if (savedArgs) {
         wrapper.apply(savedThis, savedArgs)

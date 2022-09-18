@@ -9,12 +9,25 @@
     :min-height="150"
   >
     <section class="projects">
-      <template v-if="contentStore.projects?.items && contentStore.projects.items.length > 0">
+      <template
+        v-if="
+          contentStore.projects?.items && contentStore.projects.items.length > 0
+        "
+      >
         <ul class="projects__list">
-          <li v-for="project in contentStore.projects.items" class="item" :key="project.id">
+          <li
+            v-for="project in contentStore.projects.items"
+            :key="project.id"
+            class="item"
+          >
             <div class="item__title" @click="onOpen(project.id, project.slug)">
               {{ project.title }}
-              <img v-if="project.cover" :src="project.cover" class="item__cover" alt="">
+              <img
+                v-if="project.cover"
+                :src="project.cover"
+                class="item__cover"
+                alt=""
+              />
             </div>
             <p v-if="project.description" class="item__description">
               {{ project.description }}
@@ -36,13 +49,11 @@ import { useWindowsStore } from '@/stores/windowsStore.js'
 import { vw, vh } from '@/utils/sizes.js'
 import { isMobile } from '@/utils/sizes.js'
 
-import { CONTENT_ITEM_CARD } from '@/const/windows.js'
-
 import DraggableCard from './DraggableCard.vue'
 
 const { t, lang } = defineProps({
   t: Function,
-  lang: String
+  lang: String,
 })
 
 const contentStore = useContentStore()

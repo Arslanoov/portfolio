@@ -5,7 +5,7 @@ import {
   ALL_WINDOWS,
   CONTENT_ITEM_CARD,
   CONTENT_WINDOW,
-  DEFAULT_OPENED_WINDOWS
+  DEFAULT_OPENED_WINDOWS,
 } from '@/const/windows.js'
 
 export const useWindowsStore = defineStore('windows', () => {
@@ -36,6 +36,6 @@ export const useWindowsStore = defineStore('windows', () => {
     windows,
     closeWindow,
     openWindow,
-    openCustomWindow
+    openCustomWindow,
   }
 })
