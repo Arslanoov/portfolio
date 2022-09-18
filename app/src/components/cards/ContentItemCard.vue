@@ -24,12 +24,10 @@
             v-html="currentItem.data.rawContent"
           />
         </section>
-        <div class="content-item__text" v-else>
-          Fetching...
-        </div>
+        <div v-else class="content-item__text">{{ t('fetching') }}...</div>
       </template>
       <template v-else>
-        <div class="content-item__text">Content Fetch Error</div>
+        <div class="content-item__text">{{ t('fetchError') }}</div>
       </template>
     </slot>
   </draggable-card>
@@ -44,10 +42,9 @@ import { isMobile } from '@/utils/sizes.js'
 
 import DraggableCard from './DraggableCard.vue'
 
-const { t, lang, name } = defineProps({
+const { t, name } = defineProps({
   t: Function,
-  lang: String,
-  name: String
+  name: String,
 })
 
 const store = useContentStore()

@@ -11,12 +11,29 @@
     <slot>
       <section class="articles">
         <h3>{{ t('articles.title') }}</h3>
-        <template v-if="contentStore.articles?.items && contentStore.articles.items.length > 0">
+        <template
+          v-if="
+            contentStore.articles?.items &&
+            contentStore.articles.items.length > 0
+          "
+        >
           <ul class="articles__list">
-            <li v-for="article in contentStore.articles.items" class="item" :key="article.id">
-              <div class="item__title" @click="onOpen(article.id, article.slug)">
+            <li
+              v-for="article in contentStore.articles.items"
+              :key="article.id"
+              class="item"
+            >
+              <div
+                class="item__title"
+                @click="onOpen(article.id, article.slug)"
+              >
                 {{ article.title }}
-                <img v-if="article.cover" :src="article.cover" class="item__cover" alt="">
+                <img
+                  v-if="article.cover"
+                  :src="article.cover"
+                  class="item__cover"
+                  alt=""
+                />
               </div>
               <p v-if="article.description" class="item__description">
                 {{ article.description }}
@@ -36,8 +53,6 @@
 import { useContentStore } from '@/stores/contentStore.js'
 import { useWindowsStore } from '@/stores/windowsStore.js'
 
-import { CONTENT_ITEM_CARD } from '@/const/windows.js'
-
 import { vw, vh } from '@/utils/sizes.js'
 import { isMobile } from '@/utils/sizes.js'
 
@@ -45,7 +60,7 @@ import DraggableCard from './DraggableCard.vue'
 
 const { t, lang } = defineProps({
   t: Function,
-  lang: String
+  lang: String,
 })
 
 const contentStore = useContentStore()
@@ -68,7 +83,7 @@ const onOpen = (id, slug) => {
   &:not(:last-of-type) {
     margin-bottom: 1.5rem;
   }
-  
+
   &__title {
     &:hover {
       cursor: pointer;

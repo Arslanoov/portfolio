@@ -11,7 +11,7 @@ export const ABOUT_WINDOW = {
   icon: 'about.svg',
   title: 'About',
   component: shallowRef(AboutCard),
-  showDesktop: true
+  showDesktop: true,
 }
 
 export const PROJECTS_WINDOW = {
@@ -19,7 +19,7 @@ export const PROJECTS_WINDOW = {
   icon: 'projects.svg',
   title: 'Projects',
   component: shallowRef(ProjectsCard),
-  showDesktop: true
+  showDesktop: true,
 }
 
 export const ARTICLES_WINDOW = {
@@ -27,16 +27,20 @@ export const ARTICLES_WINDOW = {
   icon: 'articles.svg',
   title: 'Articles',
   component: shallowRef(ArticlesCard),
-  showDesktop: true
+  showDesktop: true,
 }
 
 export const CONTENT_WINDOW = (id, slug) => ({
   name: `${CONTENT_ITEM_CARD}::${id}::${slug}`,
   component: shallowRef(ContentItemCard),
-  showDesktop: false
+  showDesktop: false,
 })
 
-export const DEFAULT_OPENED_WINDOWS = [ABOUT_WINDOW, PROJECTS_WINDOW, ARTICLES_WINDOW]
+export const DEFAULT_OPENED_WINDOWS = [
+  ABOUT_WINDOW,
+  PROJECTS_WINDOW,
+  ARTICLES_WINDOW,
+]
 
 export const ALL_WINDOWS = [ABOUT_WINDOW, PROJECTS_WINDOW, ARTICLES_WINDOW]
 

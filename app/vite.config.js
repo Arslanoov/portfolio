@@ -8,19 +8,19 @@ export default defineConfig({
     vue(),
     vueI18n({
       include: path.resolve(__dirname, './src/locales/**'),
-    })
+    }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-    }
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/styles/bootstrap";`
-      }
-    }
+        additionalData: `@import "@/assets/styles/bootstrap";`,
+      },
+    },
   },
   /*define: {
     __VUE_I18N_FULL_INSTALL__: true,

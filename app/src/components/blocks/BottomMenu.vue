@@ -5,23 +5,20 @@
         {{ changeLang.toUpperCase() }}
       </router-link>
     </div>
-    <div class="bottom-menu__time">
-      {{ hours }}:{{ minutes }}
-    </div>
+    <div class="bottom-menu__time">{{ hours }}:{{ minutes }}</div>
   </div>
 </template>
 
 <script setup>
 import { toRefs, ref } from 'vue'
 
-import { formatHours, formatMinutes } from '@/utils/date.js';
+import { formatHours, formatMinutes } from '@/utils/date.js'
 
 const hours = ref()
 const minutes = ref()
 
 const props = defineProps({
-  t: Function,
-  changeLang: String
+  changeLang: String,
 })
 
 const updateTime = () => {
@@ -33,10 +30,7 @@ const updateTime = () => {
 window.setInterval(() => updateTime(), 15000)
 updateTime()
 
-const {
-  t,
-  changeLang
-} = toRefs(props)
+const { changeLang } = toRefs(props)
 </script>
 
 <style lang="scss" scoped>
