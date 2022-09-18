@@ -10,7 +10,6 @@
   >
     <slot>
       <section class="articles">
-        <h3>{{ t('articles.title') }}</h3>
         <template
           v-if="
             contentStore.articles?.items &&
