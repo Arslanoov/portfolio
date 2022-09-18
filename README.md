@@ -34,4 +34,4 @@
 
 <h3 align="center">Short overview</h2>
 
-![1](https://user-images.githubusercontent.com/51407990/190913755-ec9d76a9-6d6b-47e4-a09f-90ebddc968f1.png)
+![1](https://user-images.githubusercontent.com/51407990/190914044-205fe930-8ca0-4949-bc15-df928324f25e.png)
