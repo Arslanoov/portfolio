@@ -17,7 +17,7 @@
         :name="window.name"
       />
     </template>
-    <BottomMenu :change-lang="changeLang" />
+    <BottomMenu :lang="lang" :change-lang="changeLang" />
   </div>
 </template>
 

@@ -47,6 +47,7 @@ export const useContentStore = defineStore('content', () => {
     } catch (e) {
       fetchedItems[id] = {
         success: false,
+        error: true,
       }
     }
   }

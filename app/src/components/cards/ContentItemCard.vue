@@ -24,11 +24,11 @@
             v-html="currentItem.data.rawContent"
           />
         </section>
-        <div v-else class="content-item__text">{{ t('fetching') }}...</div>
       </template>
-      <template v-else>
+      <template v-else-if="currentItem?.error">
         <div class="content-item__text">{{ t('fetchError') }}</div>
       </template>
+      <div v-else class="content-item__text">{{ t('fetching') }}...</div>
     </slot>
   </draggable-card>
 </template>
