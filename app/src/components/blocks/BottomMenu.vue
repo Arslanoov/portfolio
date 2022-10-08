@@ -1,9 +1,17 @@
 <template>
   <div class="bottom-menu">
-    <div class="bottom-menu__lang">
-      <router-link :to="`/${changeLang}`" class="bottom-menu__link">
-        {{ changeLang.toUpperCase() }}
-      </router-link>
+    <div class="bottom-menu__left">
+      <div class="bottom-menu__lang">
+        <router-link :to="`/${changeLang}`" class="bottom-menu__link">
+          {{ changeLang.toUpperCase() }}
+        </router-link>
+      </div>
+      <a
+        :href="`https://red.arslanoov.site/${lang}`"
+        target="_blank"
+        class="bottom-menu__old-design">
+        Old Design
+      </a>
     </div>
     <div class="bottom-menu__time">{{ hours }}:{{ minutes }}</div>
   </div>
@@ -18,6 +26,7 @@ const hours = ref()
 const minutes = ref()
 
 const props = defineProps({
+  lang: String,
   changeLang: String,
 })
 
@@ -54,8 +63,19 @@ const { changeLang } = toRefs(props)
 
   font-size: 1.6rem;
 
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__old-design {
+    text-transform: uppercase;
+  }
+
   &,
-  &__link {
+  &__link,
+  &__old-design {
     color: $white;
   }
 }
